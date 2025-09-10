@@ -1,0 +1,42 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.tabs {
+  display: flex; gap: $spacing-sm; border-bottom: $border-width solid $border-color;
+
+  &--full .tabs__tab { flex: 1; }
+
+  // sizes
+  &--sm .tabs__tab { padding: $spacing-xs $spacing-sm; font-size: $font-size-sm; }
+  &--md .tabs__tab { padding: $spacing-sm $spacing-md; }
+  &--lg .tabs__tab { padding: $spacing-md $spacing-lg; font-size: $font-size-lg; }
+
+  .tabs__tab {
+    background: none; border: none; cursor: pointer; color: $text-secondary;
+    border-bottom: 2px solid transparent; border-radius: $border-radius;
+    transition: $transition-fast; @include flex-center; gap: $spacing-xs;
+
+    &:hover { color: darken($primary, 10%); }
+    &.is-active { color: $primary; border-color: $primary; font-weight: $font-weight-medium; }
+    &:disabled { opacity: .6; cursor: not-allowed; }
+  }
+
+  // variants
+  &.tabs--pills {
+    border-bottom: 0;
+    .tabs__tab {
+      background: $bg-secondary; color: $text-primary;
+      &.is-active { background: $primary; color: $text-white; }
+    }
+  }
+
+  &.tabs--contained {
+    border-bottom: 0; padding: $spacing-xs; background: $bg-secondary; border-radius: $border-radius;
+    .tabs__tab {
+      background: transparent;
+      &.is-active { background: $bg-primary; box-shadow: $shadow-sm; border: $border-width solid $border-color; }
+    }
+  }
+}
+
+.tabs__icon { font-size: $font-size-base; }

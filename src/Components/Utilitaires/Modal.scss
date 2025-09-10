@@ -1,0 +1,210 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+// ===== OVERLAY =====
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: $z-modal;
+  
+  @include flex-center;
+  
+  // Animation d'apparition
+  animation: modal-fade-in 0.3s ease-out;
+  
+  // Pour les petits écrans
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+// ===== MODAL =====
+.modal {
+  background-color: $bg-primary;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-lg;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+  // Animation d'apparition
+  animation: modal-slide-in 0.3s ease-out;
+  
+  // Focus outline
+  &:focus {
+    outline: none;
+  }
+  
+  &__header {
+    @include flex-between;
+    padding: $spacing-lg;
+    border-bottom: $border-width solid $border-color;
+    flex-shrink: 0;
+  }
+  
+  &__title {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+  }
+  
+  &__close {
+    background: none;
+    border: none;
+    font-size: $font-size-xxl;
+    line-height: 1;
+    cursor: pointer;
+    padding: $spacing-xs;
+    width: 32px;
+    height: 32px;
+    @include flex-center;
+    border-radius: $border-radius;
+    color: $text-secondary;
+    transition: $transition-base;
+    
+    &:hover {
+      background-color: $bg-light;
+      color: $text-primary;
+    }
+    
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px $primary;
+    }
+  }
+  
+  &__body {
+    padding: $spacing-lg;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  // ===== TAILLES =====
+  &--sm {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  &--md {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  &--lg {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  &--xl {
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  &--full {
+    width: 95vw;
+    height: 95vh;
+    max-width: none;
+    max-height: none;
+    
+    @include mobile {
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+    }
+  }
+  
+  // ===== VARIANTES =====
+  
+  // Modal sans header (juste le contenu)
+  &--no-header {
+    .modal__body {
+      padding: $spacing-xl;
+    }
+  }
+  
+  // Modal avec footer
+  &__footer {
+    padding: $spacing-lg;
+    border-top: $border-width solid $border-color;
+    background-color: $bg-secondary;
+    @include flex-between;
+    gap: $spacing-md;
+    flex-shrink: 0;
+  }
+}
+
+// ===== ANIMATIONS =====
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-slide-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+// ===== RESPONSIVE =====
+@include mobile {
+  .modal {
+    margin: $spacing-md;
+    max-height: calc(100vh - #{$spacing-md * 2});
+    
+    &--full {
+      margin: 0;
+      max-height: 100vh;
+    }
+    
+    &__header,
+    &__body,
+    &__footer {
+      padding: $spacing-md;
+    }
+  }
+}
+
+// ===== UTILITAIRES =====
+
+// Pour les modals avec formulaires
+.modal-form {
+  .modal__body {
+    padding: $spacing-lg $spacing-lg $spacing-md;
+  }
+  
+  .modal__footer {
+    justify-content: flex-end;
+    
+    .btn + .btn {
+      margin-left: $spacing-sm;
+    }
+  }
+}
+
+// Pour les modals de confirmation
+.modal-confirm {
+  .modal__body {
+    text-align: center;
+    padding: $spacing-xl;
+  }
+  
+  .modal__footer {
+    justify-content: center;
+  }
+}

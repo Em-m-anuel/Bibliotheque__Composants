@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.breadcrumbs {
+  display: flex; align-items: center; flex-wrap: wrap;
+  font-size: $font-size-sm; color: $text-secondary;
+
+  &__item {
+    a {
+      color: $primary; text-decoration: none;
+      &:hover { text-decoration: underline; }
+    }
+    &.is-ellipsis { color: $text-muted; }
+  }
+
+  &__separator { margin: 0 $spacing-xs; color: $text-muted; }
+}
