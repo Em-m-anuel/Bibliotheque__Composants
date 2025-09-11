@@ -1,0 +1,28 @@
+// src/Components/Card/_card.scss
+.card-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+.card-content {
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #ddd;
+  background-color: #f7f7f7;
+}

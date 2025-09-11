@@ -1,0 +1,37 @@
+// src/Components/Table/_table.scss
+.table-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    cursor: default;
+    
+    &.sortable {
+      cursor: pointer;
+      &:hover {
+        background-color: #e2e2e2;
+      }
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+}
+
+.pagination {
+  margin-top: 10px;
+  text-align: center;
+}

@@ -1,0 +1,15 @@
+.radio-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 1rem;
+}
+
+.radio-container input {
+  margin-right: 0.5rem;
+}
+
+.radio-label {
+  font-weight: normal;
+}
