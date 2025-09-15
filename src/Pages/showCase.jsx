@@ -58,7 +58,8 @@ export default function Showcase() {
 
   const handleFormSubmit = (data) => {
     console.log('Formulaire soumis :', data);
-    alert('Note ajoutée ! Données en console.');
+    setAlerts(prev => ({ ...prev, success: true }));
+    setTimeout(() => setAlerts(prev => ({ ...prev, success: false })), 3000);
   };
 
   const handleSearch = (query) => {
@@ -76,14 +77,14 @@ export default function Showcase() {
     setTimeout(() => {
       setIsLoading(false);
       setShowModal(false);
-      setAlerts({ ...alerts, success: true });
-      setTimeout(() => setAlerts({ ...alerts, success: false }), 3000);
+      setAlerts(prev => ({ ...prev, success: true }));
+      setTimeout(() => setAlerts(prev => ({ ...prev, success: false })), 3000);
     }, 2000);
   };
 
   const showAlert = (type) => {
-    setAlerts({ ...alerts, [type]: true });
-    setTimeout(() => setAlerts({ ...alerts, [type]: false }), 3000);
+    setAlerts(prev => ({ ...prev, [type]: true }));
+    setTimeout(() => setAlerts(prev => ({ ...prev, [type]: false })), 3000);
   };
 
   const layoutStyle = {
@@ -208,14 +209,22 @@ export default function Showcase() {
         </div>
       </section>
 
-      {/* 5. Composants Utilitaires */}
+      {/* 5. Composants Utilitaires - Corrected Alerts */}
       <section style={sectionStyle}>
         <h2>5. Composants Utilitaires</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
           <div>
             <h3>Alertes</h3>
-            {alerts.success && <Alert type="success" message="Succès !" onClose={() => setAlerts({ ...alerts, success: false })} />}
-            <Button label="Afficher Erreur" onClick={() => showAlert('error')} variant="secondary" />
+            <div style={{ marginBottom: '10px' }}>
+              <Button label="Succès" variant="primary" onClick={() => showAlert('success')} />
+              <Button label="Erreur" variant="secondary" onClick={() => showAlert('error')} style={{ marginLeft: '10px' }} />
+              <Button label="Avertissement" variant="warning" onClick={() => showAlert('warning')} style={{ marginLeft: '10px' }} />
+              <Button label="Info" variant="info" onClick={() => showAlert('info')} style={{ marginLeft: '10px' }} />
+            </div>
+            {alerts.success && <Alert type="success" message="Opération réussie !" onClose={() => setAlerts(prev => ({ ...prev, success: false }))} />}
+            {alerts.error && <Alert type="error" message="Une erreur s'est produite." onClose={() => setAlerts(prev => ({ ...prev, error: false }))} />}
+            {alerts.warning && <Alert type="warning" message="Attention, action critique !" onClose={() => setAlerts(prev => ({ ...prev, warning: false }))} />}
+            {alerts.info && <Alert type="info" message="Information utile affichée." onClose={() => setAlerts(prev => ({ ...prev, info: false }))} />}
           </div>
           <div>
             <h3>Loader</h3>
