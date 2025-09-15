@@ -1,0 +1,57 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &--bordered { border: $border-width solid $border-color; border-radius: $border-radius; }
+  &--striped  .list__item:nth-child(even) { background-color: $bg-secondary; }
+
+  &--dense .list__item { padding: $spacing-xs $spacing-sm; gap: $spacing-sm; }
+}
+
+.list__item {
+  @include flex-between;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: $border-width solid $border-color-light;
+
+  &:last-child { border-bottom: 0; }
+
+  &.is-active {
+    background-color: rgba($primary, 0.06);
+  }
+}
+
+.list__icon {
+  color: $primary;
+  font-size: $font-size-lg;
+}
+
+.list__avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px $bg-primary, 0 0 0 3px $border-color;
+}
+
+.list__content {
+  flex: 1 1 auto;
+  min-width: 0; // pour ellipsis
+}
+
+.list__label {
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+  @include text-truncate;
+}
+
+.list__desc {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  @include text-truncate;
+}
+
+.list__right { color: $text-muted; }

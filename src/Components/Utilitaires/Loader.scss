@@ -1,0 +1,125 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.loader-container {
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.loader {
+  display: inline-block;
+  position: relative;
+  
+  &__spinner {
+    border-radius: 50%;
+    border-style: solid;
+    animation: loader-spin 1s linear infinite;
+  }
+  
+  &__text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    text-align: center;
+    margin-top: $spacing-xs;
+  }
+  
+  // ===== TAILLES =====
+  &--sm {
+    .loader__spinner {
+      width: 20px;
+      height: 20px;
+      border-width: 2px;
+    }
+  }
+  
+  &--md {
+    .loader__spinner {
+      width: 32px;
+      height: 32px;
+      border-width: 3px;
+    }
+  }
+  
+  &--lg {
+    .loader__spinner {
+      width: 48px;
+      height: 48px;
+      border-width: 4px;
+    }
+  }
+  
+  // ===== COULEURS =====
+  &--primary {
+    .loader__spinner {
+      border-color: $primary transparent $primary transparent;
+    }
+  }
+  
+  &--secondary {
+    .loader__spinner {
+      border-color: $secondary transparent $secondary transparent;
+    }
+  }
+  
+  &--white {
+    .loader__spinner {
+      border-color: $text-white transparent $text-white transparent;
+    }
+    
+    .loader__text {
+      color: $text-white;
+    }
+  }
+  
+  &--success {
+    .loader__spinner {
+      border-color: $success transparent $success transparent;
+    }
+  }
+  
+  &--warning {
+    .loader__spinner {
+      border-color: $warning transparent $warning transparent;
+    }
+  }
+}
+
+// ===== ANIMATION =====
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// ===== VARIANTES D'USAGE =====
+
+// Loader en overlay (pour couvrir un contenu)
+.loader--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: $z-modal;
+  
+  .loader-container {
+    height: 100%;
+  }
+}
+
+// Loader inline (dans un bouton par exemple)
+.loader--inline {
+  .loader-container {
+    flex-direction: row;
+    gap: $spacing-xs;
+  }
+  
+  .loader__text {
+    margin-top: 0;
+  }
+}
